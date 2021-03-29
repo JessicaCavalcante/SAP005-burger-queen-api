@@ -3,23 +3,6 @@ const { User }  = require('../db/models/index');
 const bcrypt = require('bcrypt');
 
 const UserController = {
-  getAllUser(req, res) {
-    User.findAll({
-      attributes: {
-        exclude: ['password']
-      },
-      where: {
-        restaurant: req.loggedUser.restaurant
-      }
-    })
-      .then((result) => {
-        res.status(200).json({code: 200, result});
-      })
-      .catch((error) => {
-        res.json({error})
-      });
-  },
-
   createUser(req, res) {
     let { email, password, role, restaurant, username } = req.body;
     if (password) {
@@ -45,6 +28,23 @@ const UserController = {
           res.status(403).json({code: 403, message: 'Email already in use'})
           return;
         }
+      });
+  },
+  
+  getAllUser(req, res) {
+    User.findAll({
+      attributes: {
+        exclude: ['password']
+      },
+      where: {
+        restaurant: req.loggedUser.restaurant
+      }
+    })
+      .then((result) => {
+        res.status(200).json({code: 200, result});
+      })
+      .catch((error) => {
+        res.json({error})
       });
   },
 
