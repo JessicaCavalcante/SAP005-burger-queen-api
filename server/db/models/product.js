@@ -19,10 +19,10 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
       validate: {
         notEmpty: {
-          msg: "Name cannot be empty"
+          msg: 'Name cannot be empty'
         },
         notNull: {
-          msg: "Name is required"
+          msg: 'Name is required'
         }
       }
     },
@@ -30,10 +30,10 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       validate: {
         notEmpty: {
-          msg: "Flavor cannot be empty"
+          msg: 'Flavor cannot be empty'
         },
         isAlpha: {
-          msg: " Will only allowed letter"
+          msg: ' Will only allowed letter'
         }
       }
     },
@@ -41,10 +41,10 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       validate: {
         notEmpty: {
-          msg: "Complement cannot be empty"
+          msg: 'Complement cannot be empty'
         },
         isAlpha: {
-          msg: " Will only allowed letter"
+          msg: ' Will only allowed letter'
         }
       }
     },
@@ -53,10 +53,10 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
       validate: {
         isInt: {
-          msg: "Price must be an integer"
+          msg: 'Price must be an integer'
         },
         notNull: {
-          msg: "Price is required"
+          msg: 'Price is required'
         }
       }
     },
@@ -65,10 +65,10 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
       validate: {
         isUrl: {
-          msg: "Image must be a Url"
+          msg: 'Image must be a Url'
         },
         notNull: {
-          msg: "Image is required"
+          msg: 'Image is required'
         }
       }
     },
@@ -77,10 +77,10 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
       validate: {
         notEmpty: {
-          msg: "Type cannot be empty"
+          msg: 'Type cannot be empty'
         },
         notNull: {
-          msg: "Type is required"
+          msg: 'Type is required'
         }
       }
     },
@@ -89,10 +89,10 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
       validate: {
         notEmpty: {
-          msg: "Subtype cannot be empty"
+          msg: 'Subtype cannot be empty'
         },
         notNull: {
-          msg: "Subtype is required"
+          msg: 'Subtype is required'
         }
       }
     },
