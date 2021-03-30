@@ -72,7 +72,7 @@ const UserController = {
 
   updateUser(req, res) {
     const uid = req.params.id;
-    const { username, role } = req.body;
+    const { username, role, email } = req.body;
     let data = {};
 
     if (username) {
@@ -80,6 +80,9 @@ const UserController = {
     }
     if (role) {
       data.role = role
+    }
+    if (email) {
+      data.email = email
     }
     User.update(
       data,
@@ -90,10 +93,15 @@ const UserController = {
         res.status(200).json({code: 200, updatedUser});
       })
       .catch((error) => {
-        if (Object.keys(error).length === 0) {
+        if (error.name === 'SequelizeValidationError' || Object.keys(error).length === 0) {
           res.status(400).json({code: 400, message: 'Missing required data'})
           return;
         }
+        if (error.name === 'SequelizeUniqueConstraintError') {
+          res.status(403).json({code: 403, message: 'Email already in use'})
+          return;
+        }
+        res.json(error);
       });
   },
 
