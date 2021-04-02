@@ -4,7 +4,6 @@ const AuthController = require('../controller/AuthController')
 
 const router = Router()
 
-// aqui vai as requisições
 router.post('/', UserController.createUser)
 router.get('/', AuthController.auth, UserController.getAllUser)
 router.get('/:id', AuthController.auth, UserController.getUserById)

@@ -22,7 +22,6 @@ const OrderController =  {
         prod.id = 0;
       }
       const dbProd = await Product.findByPk(prod.id);
-      console.log(dbProd)
       if (dbProd) {
         return {
           name: dbProd.name,
@@ -75,7 +74,6 @@ const OrderController =  {
       ]
     })
     .then((result) => {
-      console.log(result);
       res.status(200).json({code: 200, result});
     })
     .catch((error) => {
@@ -128,7 +126,6 @@ const OrderController =  {
         ]
       })
       .then((result) => {
-        console.log(result);
         res.status(200).json({code: 200, result});
       })
     })

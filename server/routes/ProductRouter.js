@@ -4,7 +4,6 @@ const AuthController = require('../controller/AuthController')
 
 const router = Router()
 
-// aqui vai as requisições
 router.post('/', AuthController.auth, ProductController.createProduct)
 router.get('/', AuthController.auth, ProductController.getAllProduct)
 router.get('/:id', AuthController.auth, ProductController.getProductById)
