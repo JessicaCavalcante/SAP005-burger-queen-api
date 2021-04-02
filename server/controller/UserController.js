@@ -36,12 +36,10 @@ const UserController = {
     User.findAll({
       attributes: {
         exclude: ['password']
-      },
-      where: {
-        restaurant: req.loggedUser.restaurant
       }
-    })
+      })
       .then((result) => {
+        console.log(result)
         res.status(200).json({code: 200, result});
       })
       .catch((error) => {
@@ -54,7 +52,6 @@ const UserController = {
     User.findOne({
       where: {
         id: uid,
-        restaurant: req.loggedUser.restaurant
       },
       attributes: {
         exclude: ['password']
@@ -111,7 +108,6 @@ const UserController = {
     User.destroy({
       where: {
         id: uid,
-        restaurant: req.loggedUser.restaurant
       }
     })
       .then((result) => {
