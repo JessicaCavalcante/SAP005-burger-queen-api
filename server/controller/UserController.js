@@ -28,6 +28,7 @@ const UserController = {
           res.status(403).json({code: 403, message: 'Email already in use'})
           return;
         }
+        res.json(error)
       });
   },
   

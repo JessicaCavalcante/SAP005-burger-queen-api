@@ -24,7 +24,7 @@ const AuthController = {
       }
 
       //generate & sign token
-      let jwtPayload = { email: user.email, restaurant: user.restaurant }; //public payload!
+      let jwtPayload = { email: user.email, restaurant: user.restaurant, uid: user.id }; //public payload!
       let token = jwt.sign(jwtPayload, process.env.JWT_SECRET);
 
       return res.status(200).json({ token });

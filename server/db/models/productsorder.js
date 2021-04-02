@@ -3,21 +3,31 @@ const {
   Model
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
-  class Product extends Model {
+  class ProductsOrder extends Model {
     /**
      * Helper method for defining associations.
      * This method is not a part of Sequelize lifecycle.
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      this.belongsToMany(models.Order, {
-        foreignKey: 'product_id',
-        through: 'ProductsOrders',
-        as: 'orders'
+      ProductsOrder.belongsTo(models.Order, {
+        foreignKey: 'order_id',
+        as: 'productsOrder'
       })
+
     }
   };
-  Product.init({
+  ProductsOrder.init({
+    order_id: DataTypes.INTEGER,
+    product_id: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      validate: {
+        notNull: {
+          msg: 'Product Id is empty or not found'
+        }
+      }
+    },
     name: {
       type: DataTypes.STRING,
       allowNull: false,
@@ -64,45 +74,34 @@ module.exports = (sequelize, DataTypes) => {
         }
       }
     },
-    image: {
-      type: DataTypes.STRING,
+    qtd: {
+      type: DataTypes.INTEGER,
       allowNull: false,
       validate: {
-        isUrl: {
-          msg: 'Image must be a Url'
+        isInt: {
+          msg: 'Quantity must be an integer'
         },
         notNull: {
-          msg: 'Image is required'
-        }
-      }
-    },
-    type: {
-      type: DataTypes.STRING,
-      allowNull: false,
-      validate: {
-        notEmpty: {
-          msg: 'Type cannot be empty'
+          msg: 'Quantity is required'
         },
-        notNull: {
-          msg: 'Type is required'
-        }
-      }
-    },
-    subtype: {
-      type: DataTypes.STRING,
-      allowNull: false,
-      validate: {
-        notEmpty: {
-          msg: 'Subtype cannot be empty'
-        },
-        notNull: {
-          msg: 'Subtype is required'
+        min: {
+          args: [[1]],
+          msg: 'Quantity only allow values >= 1'
         }
       }
     },
   }, {
     sequelize,
-    modelName: 'Product',
+    modelName: 'ProductsOrder',
   });
-  return Product;
+
+  ProductsOrder.addHook('afterCreate', 'excludeAttr', (record) => {
+    record.dataValues.id = record.dataValues.product_id;
+    delete record.dataValues.order_id;
+    delete record.dataValues.updatedAt;
+    delete record.dataValues.createdAt;
+    delete record.dataValues.product_id;
+  });
+
+  return ProductsOrder;
 };
